@@ -20,6 +20,7 @@
 
 import {hexToRgb} from './color-utils';
 import uniq from 'lodash.uniq';
+import {validateInputData} from 'processors/data-processor';
 import {KeplerTable} from 'utils/table-utils/kepler-table';
 
 // apply a color for each dataset
@@ -69,6 +70,11 @@ function getNewDatasetColor(datasets) {
 }
 
 export function createNewDataEntry({info, data}, datasets = {}) {
+  const validatedData = validateInputData(data);
+  if (!validatedData) {
+    return {};
+  }
+
   info = info || {};
   const color = info.color || getNewDatasetColor(datasets);
 

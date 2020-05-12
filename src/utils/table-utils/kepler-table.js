@@ -19,7 +19,7 @@
 // THE SOFTWARE.
 
 import {TRIP_POINT_FIELDS, SORT_ORDER} from 'constants/default-settings';
-import {validateInputData} from 'processors/data-processor';
+// import {validateInputData} from 'processors/data-processor';
 import {generateHashId} from 'utils/utils';
 import {getGpuFilterProps} from 'utils/gpu-filter-utils';
 import {getFieldDomain} from 'utils/filter-utils';
@@ -27,12 +27,13 @@ import {ascending, descending} from 'd3-array';
 
 export class KeplerTable {
   constructor({info = {}, data, color}) {
-    const validatedData = validateInputData(data);
-    if (!validatedData) {
-      return {};
-    }
+    // TODO - what to do if validation fails? Can kepler handle exceptions?
+    // const validatedData = validateInputData(data);
+    // if (!validatedData) {
+    //   return this;
+    // }
 
-    const allData = validatedData.rows;
+    const allData = data.rows;
     const datasetInfo = {
       id: generateHashId(4),
       label: 'new dataset',
@@ -43,7 +44,7 @@ export class KeplerTable {
     // add tableFieldIndex and id to fields
     // TODO: don't need id and name and tableFieldIndex anymore
     // Add value accessor instead
-    const fields = validatedData.fields.map((f, i) => ({
+    const fields = data.fields.map((f, i) => ({
       ...f,
       id: f.name,
       tableFieldIndex: i + 1
