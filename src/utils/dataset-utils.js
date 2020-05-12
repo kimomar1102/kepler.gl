@@ -78,7 +78,7 @@ export function createNewDataEntry({info, data}, datasets = {}) {
   info = info || {};
   const color = info.color || getNewDatasetColor(datasets);
 
-  const keplerTable = new KeplerTable({info, data, color});
+  const keplerTable = new KeplerTable({info, data: validatedData, color});
   return {
     [keplerTable.id]: keplerTable
   };
